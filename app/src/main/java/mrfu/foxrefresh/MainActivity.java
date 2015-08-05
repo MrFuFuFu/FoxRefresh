@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements PullRefreshListener{
                 initData();
                 pull_refresh_progress_baseview.reset();
             }
-        }, 2000);
+        }, 1500);
     }
     @Override
     public void onPullUpRefresh() {
@@ -86,7 +86,7 @@ public class MainActivity extends Activity implements PullRefreshListener{
                 initData();
                 pull_refresh_progress_baseview.reset();
             }
-        }, 2000);
+        }, 1000);
     }
 
     private class ListViewAdapter extends BaseAdapter {
