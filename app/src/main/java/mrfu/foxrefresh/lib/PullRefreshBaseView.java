@@ -320,7 +320,7 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 
 	private void scrollToAnimator(int end){
 		try {
-			ObjectAnimator.ofInt(PullRefreshBaseView.this, "scrollY", getScrollY(), end).setDuration(250).start();
+			ObjectAnimator.ofInt(PullRefreshBaseView.this, "scrollY", getScrollY(), end).setDuration(200).start();
 
 		}catch (Exception e){
 			scrollTo(0, end);
@@ -328,7 +328,8 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	}
 
 	private void refreshing(){
-		scrollTo(0, - HEADER_VIEW_HEIGHT);
+		scrollToAnimator(- HEADER_VIEW_HEIGHT);
+//		scrollTo(0, - HEADER_VIEW_HEIGHT);
 		if(state == RELEASE_TO_REFRESH){
 			state = REFRESHING;
 			arrow.setVisibility(View.VISIBLE);
