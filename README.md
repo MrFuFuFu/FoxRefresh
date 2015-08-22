@@ -4,9 +4,9 @@ FoxRefresh
 
 ## 描述
 
-小狐狸下拉刷新，如图，好吧，又一个下拉刷新，`PullRefreshBaseView`继承自`FrameLayout`里面放了`AbsListView`，上层`PullRefreshProgressListView`继承自`RelativeLayout`里面放了 [PullRefreshBaseView](https://github.com/MrFuFuFu/MrFuPullToRefresh) 和 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)，这么做的目的是为了是让`SmoothProgressBar` 能在最顶部显示出来。 上拉加载中使用的 [CircularProgress](https://github.com/castorflex/SmoothProgressBar) 同样使用的是 [castorflex](https://github.com/castorflex) 的 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar) 的开源项目，oh，开源真是太方便了。I love open source code.
+小狐狸下拉刷新，如图，好吧，又一个下拉刷新，`PullRefreshBaseView` 继承自`FrameLayout`，里面放了 `AbsListView`，上层 `PullRefreshProgressListView` 继承自 `RelativeLayout`，里面放了 [PullRefreshBaseView](https://github.com/MrFuFuFu/MrFuPullToRefresh) 和 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)，这么做的目的是为了是让 `SmoothProgressBar` 能在最顶部显示出来。 上拉加载中使用的 [CircularProgress](https://github.com/castorflex/SmoothProgressBar) 同样使用的是 [castorflex](https://github.com/castorflex) 的 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar) 的开源项目，oh，开源真是太方便了。I love open source code.
 
-## 如何使用
+## 如何使用？
 
 >虽然 `PullRefreshProgressListView` 不是一个 `ListView`, 但是这里你可以定义所有关于 `ListView` 的方法，因为 我已经将这些属性都赋给了 `PullRefreshProgressListView` 声明的 `ListView`。
 
@@ -25,7 +25,7 @@ FoxRefresh
     android:layout_below="@+id/toolbar" />
 ```
 
->`PullRefreshProgressListView` 不是一个 `ListView`， 在设置 adapter 的时候，你需要调用 `pull_refresh_progress_baseview.getListView()`; 方法取出 `ListView`
+>`PullRefreshProgressListView` 不是一个 `ListView`， 在设置 adapter 的时候，你需要调用 `pull_refresh_progress_baseview.getListView()` 方法取出 `ListView`
 
 ```java
 pull_refresh_progress_baseview = (PullRefreshProgressListView)findViewById(R.id.pull_refresh_progress_baseview);
@@ -70,6 +70,8 @@ public void onPullUpRefresh() {
 }
 ```
 
+>调用 'pull_refresh_progress_baseview.reset();` 方法结束刷新
+
 ***
 ***
 我是传说中的分割线
@@ -105,7 +107,7 @@ Fox Pull to refresh，As the gif shows, `PullRefreshBaseView` inherit form `Fram
     android:layout_below="@+id/toolbar" />
 ```
 
->PullRefreshProgressListView is not a ListView, so when you are setAdapter, you should use `pull_refresh_progress_baseview.getListView()` to get the `ListView`.
+>`PullRefreshProgressListView` is not a `ListView`, so when you are `setAdapter`, you should use `pull_refresh_progress_baseview.getListView()` to get the `ListView`.
 
 
 ```java
@@ -118,7 +120,7 @@ listView.setAdapter(adapter);
 pull_refresh_progress_baseview.setRefreshing();
 ```
 
->Don't forget implements PullRefreshListener.
+>Don't forget implements `PullRefreshListener`.
 
 ```java
 public class MainActivity extends Activity implements PullRefreshListener{
@@ -150,6 +152,8 @@ public void onPullUpRefresh() {
     }, 1000);
 }
 ```
+
+>`pull_refresh_progress_baseview.reset();` method to finish refresh.
 
 
 
