@@ -70,7 +70,7 @@ public void onPullUpRefresh() {
 }
 ```
 
->调用 'pull_refresh_progress_baseview.reset();` 方法结束刷新
+>调用 `pull_refresh_progress_baseview.reset();` 方法结束刷新
 
 ***
 ***
