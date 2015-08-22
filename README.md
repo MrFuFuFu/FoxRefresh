@@ -8,7 +8,7 @@ FoxRefresh
 
 ## 如何使用？
 
->虽然 `PullRefreshProgressListView` 不是一个 `ListView`, 但是这里你可以定义所有关于 `ListView` 的方法，因为 我已经将这些属性都赋给了 `PullRefreshProgressListView` 声明的 `ListView`。
+虽然 `PullRefreshProgressListView` 不是一个 `ListView`, 但是这里你可以定义所有关于 `ListView` 的方法，因为 我已经将这些属性都赋给了 `PullRefreshProgressListView` 声明的 `ListView`。
 
 ```xml
 <mrfu.foxrefresh.lib.PullRefreshProgressListView
@@ -25,7 +25,7 @@ FoxRefresh
     android:layout_below="@+id/toolbar" />
 ```
 
->`PullRefreshProgressListView` 不是一个 `ListView`， 在设置 adapter 的时候，你需要调用 `pull_refresh_progress_baseview.getListView()` 方法取出 `ListView`
+`PullRefreshProgressListView` 不是一个 `ListView`， 在设置 adapter 的时候，你需要调用 `pull_refresh_progress_baseview.getListView()` 方法取出 `ListView`
 
 ```java
 pull_refresh_progress_baseview = (PullRefreshProgressListView)findViewById(R.id.pull_refresh_progress_baseview);
@@ -37,15 +37,15 @@ listView.setAdapter(adapter);
 pull_refresh_progress_baseview.setRefreshing();
 ```
 
->别忘了实现如下接口
+别忘了实现如下接口
 
 ```java
 public class MainActivity extends Activity implements PullRefreshListener{
 ```
 
->* `onPullDownRefresh` 为下拉的时候，要做的事情，你可以在这个时候去请求网络数据。
+* `onPullDownRefresh` 为下拉的时候，要做的事情，你可以在这个时候去请求网络数据。
 
->* `onPullUpRefresh` 为上拉加载的时候，要做的事情，这个时候你可以去请求下一页的数据，如果你不需要上拉加载，你可以调用 `setEnablePullUpRefresh(false)` 方法关闭上拉加载。
+* `onPullUpRefresh` 为上拉加载的时候，要做的事情，这个时候你可以去请求下一页的数据，如果你不需要上拉加载，你可以调用 `setEnablePullUpRefresh(false)` 方法关闭上拉加载。
 
 ```java
 @Override
@@ -70,7 +70,7 @@ public void onPullUpRefresh() {
 }
 ```
 
->调用 `pull_refresh_progress_baseview.reset();` 方法结束刷新
+调用 `pull_refresh_progress_baseview.reset();` 方法结束刷新
 
 ***
 ***
@@ -90,7 +90,7 @@ Fox Pull to refresh，As the gif shows, `PullRefreshBaseView` inherit form `Fram
 
 ## How to use?
 
->Althouh `PullRefreshProgressListView` is not a `ListView`, but in the xml you can define all about `ListView` attributes. Because I had use those attributes assignment to the `PullRefreshProgressListView` of `ListView`.
+Althouh `PullRefreshProgressListView` is not a `ListView`, but in the xml you can define all about `ListView` attributes. Because I had use those attributes assignment to the `PullRefreshProgressListView` of `ListView`.
 
 ```xml
 <mrfu.foxrefresh.lib.PullRefreshProgressListView
@@ -107,7 +107,7 @@ Fox Pull to refresh，As the gif shows, `PullRefreshBaseView` inherit form `Fram
     android:layout_below="@+id/toolbar" />
 ```
 
->`PullRefreshProgressListView` is not a `ListView`, so when you are `setAdapter`, you should use `pull_refresh_progress_baseview.getListView()` to get the `ListView`.
+`PullRefreshProgressListView` is not a `ListView`, so when you are `setAdapter`, you should use `pull_refresh_progress_baseview.getListView()` to get the `ListView`.
 
 
 ```java
@@ -120,15 +120,15 @@ listView.setAdapter(adapter);
 pull_refresh_progress_baseview.setRefreshing();
 ```
 
->Don't forget implements `PullRefreshListener`.
+Don't forget implements `PullRefreshListener`.
 
 ```java
 public class MainActivity extends Activity implements PullRefreshListener{
 ```
 
->* `onPullDownRefresh` is pull down refresh. You can go to request data fomr the network at this time.
+* `onPullDownRefresh` is pull down refresh. You can go to request data fomr the network at this time.
 
->* `onPullUpRefresh` is up to load more data, You can go to request next page data form network at this time. if you don't need up to load more data, you can use `setEnablePullUpRefresh(false)` method to  close it.
+* `onPullUpRefresh` is up to load more data, You can go to request next page data form network at this time. if you don't need up to load more data, you can use `setEnablePullUpRefresh(false)` method to  close it.
 
 ```java
 @Override
@@ -153,7 +153,7 @@ public void onPullUpRefresh() {
 }
 ```
 
->`pull_refresh_progress_baseview.reset();` method to finish refresh.
+`pull_refresh_progress_baseview.reset();` method to finish refresh.
 
 
 
