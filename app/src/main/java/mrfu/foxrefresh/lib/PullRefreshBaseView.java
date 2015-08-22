@@ -119,7 +119,7 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 		listparams.addRule(RelativeLayout.ABOVE, footer.getId());
 		content.addView(absListView, listparams);
 
-		RelativeLayout.LayoutParams footerParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(40));
+		RelativeLayout.LayoutParams footerParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(50));
 		footerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 		content.addView(footer, footerParams);
 

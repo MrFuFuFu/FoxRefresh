@@ -4,8 +4,11 @@ FoxRefresh
 
 ## 描述
 
-下拉刷新
+下拉刷新，如图，好吧，又一个下拉刷新，`PullRefreshBaseView`继承自`FrameLayout`里面放了`AbsListView`，上层`PullRefreshProgressListView`继承自`RelativeLayout`里面放了 [PullRefreshBaseView](https://github.com/MrFuFuFu/MrFuPullToRefresh) 和 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)，这么做的目的是为了是让`SmoothProgressBar` 能在最顶部显示出来。 上拉加载中使用的 [CircularProgress](https://github.com/castorflex/SmoothProgressBar) 同样使用的是 [castorflex](https://github.com/castorflex) 的 [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar) 的开源项目，oh，开源真是太方便了。I love open source code.
 
+## 截图
+
+![FoxRefresh_screen.gif](img/FoxRefresh_screen.gif)
 
 ## More about me
 

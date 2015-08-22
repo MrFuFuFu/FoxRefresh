@@ -38,7 +38,7 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
 
     private void initViewsCustom(AttributeSet attrs){
         smooth_progress = new SmoothProgressBar(getContext());
-        addView(smooth_progress, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dip2px(2)));
+        addView(smooth_progress, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dip2px(2.5f)));
         pullRefreshListView = new PullRefreshListView(getContext(), attrs);
         RelativeLayout.LayoutParams pullListViewParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         pullListViewParams.addRule(RelativeLayout.BELOW, smooth_progress.getId());
