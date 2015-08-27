@@ -147,7 +147,8 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	}
 
 	/**
-	 * 初始化下拉刷新——头
+     * 初始化下拉刷新——头
+	 * init header view
 	 */
 	private void initHeader(){
 		header = new RelativeLayout(getContext());
@@ -168,6 +169,7 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 
 	/**
 	 * 初始化上拉加载——底
+     * init bottom view
 	 */
 	private void initFooter(){
 		footer = new RelativeLayout(getContext());

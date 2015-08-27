@@ -18,18 +18,22 @@ import mrfu.foxrefresh.R;
 /**
  * Created by MrFu on 15/8/4.
  */
-public class PullRefreshListView extends RelativeLayout implements PullRefreshBaseView.PullRefreshBaseViewListener {
+public class PullRefreshListView extends RelativeLayout implements PullRefreshBaseView.PullRefreshBaseViewListener, PullRefreshBaseView.OnScrollListener{
 
     private final int smooth_progress_color;
     private final int smooth_progress_height;
     private SmoothProgressBar smooth_progress;
     private PullRefreshGetListView pullRefreshListView;
+    private OnScrollListener listener;
+    private PullRefreshListener pullRefreshListener;
 
     public void setPullRefreshListener(PullRefreshListener listener){
         pullRefreshListener = listener;
     }
 
-    private PullRefreshListener pullRefreshListener;
+    public void setOnScrollListener(OnScrollListener listener){
+        this.listener = listener;
+    }
 
     public PullRefreshListView(Context context) {
         this(context, null);
@@ -57,6 +61,7 @@ public class PullRefreshListView extends RelativeLayout implements PullRefreshBa
         addView(pullRefreshListView, pullListViewParams);
 
         pullRefreshListView.setPullRefreshBaseViewListener(this);
+        pullRefreshListView.setOnScrollListener(this);
         initSmoothProgressBar();
     }
 
@@ -99,6 +104,14 @@ public class PullRefreshListView extends RelativeLayout implements PullRefreshBa
         pullRefreshListView.setEnablePullUpRefresh(enablePullUpRefresh);
     }
 
+    /**
+     * is or not support pull to load new data
+     * @param enablePullDownRefresh default is true
+     */
+    public void setEnablePullDownRefresh(boolean enablePullDownRefresh) {
+        pullRefreshListView.setEnablePullDownRefresh(enablePullDownRefresh);
+    }
+
     @Override
     public void onProgress(int progress100Percent, boolean isVisible) {
         smooth_progress.setVisibility(isVisible ? View.VISIBLE : View.GONE);
@@ -113,6 +126,28 @@ public class PullRefreshListView extends RelativeLayout implements PullRefreshBa
     @Override
     public void onPullUpRefresh() {
         pullRefreshListener.onPullUpRefresh();
+    }
+
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if(listener != null){
+            listener.onScrollStateChanged(view, scrollState);
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if(listener != null){
+            listener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        }
+    }
+
+
+    public interface OnScrollListener{
+        void onScrollStateChanged(AbsListView view, int scrollState);
+
+        void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount);
     }
 
 

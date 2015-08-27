@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +42,17 @@ public class MainActivity extends Activity implements PullRefreshListener{
         initData(true);
         listView.setAdapter(adapter);
         pull_refresh_progress_baseview.setRefreshing();
+        pull_refresh_progress_baseview.setOnScrollListener(new PullRefreshListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                Log.i("MrFu", "scrollState = " + scrollState);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                Log.i("MrFu", "firstVisibleItem = " + firstVisibleItem + "  visibleItemCount = " + visibleItemCount + "  totalItemCount = " + totalItemCount);
+            }
+        });
     }
 
     private void initTitleBar() {
