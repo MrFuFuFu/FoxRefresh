@@ -9,4 +9,10 @@
     <dimen name="circular_progress_large_size">60dp</dimen>
     <integer name="circular_progress_max">100</integer>
 
+    <color name="smooth_progress_color">#ffff4081</color>
+    <dimen name="smooth_progress_height">2.5dp</dimen>
+    <dimen name="refresh_booter_height">50dp</dimen>
+    <dimen name="refresh_header_height">52dp</dimen>
+    <color name="refresh_footer_backgroundcolor">#7fe8e8e8</color>
+
 </resources>

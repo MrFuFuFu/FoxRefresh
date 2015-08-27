@@ -2,6 +2,7 @@ package mrfu.foxrefresh.lib;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
@@ -23,8 +24,11 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	protected static final int RELEASE_TO_REFRESH = 0x1;
 	protected static final int REFRESHING = 0x2;
 	protected static int HEADER_VIEW_HEIGHT;
+    private final int refresh_footer_backgroundcolor;
+    private int refresh_booter_height;
+    private int refresh_header_height;
 
-	protected int mTouchSlop;
+    protected int mTouchSlop;
 	private float mLastMotionX;
 	private float mLastMotionY;
 	protected AbsListView absListView;
@@ -50,7 +54,7 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	private AnimationDrawable animationDrawable;
 
 	public PullRefreshBaseView(Context context) {
-		super(context);
+		this(context, null);
 	}
 
 	public void setOnScrollListener(OnScrollListener listener){
@@ -58,9 +62,18 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	}
 
 	public PullRefreshBaseView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initViews(attrs);
+		this(context, attrs, 0);
 	}
+
+    public PullRefreshBaseView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PullRefreshListView);
+        refresh_booter_height = attributes.getDimensionPixelSize(R.styleable.PullRefreshListView_refresh_booter_height, getResources().getDimensionPixelSize(R.dimen.refresh_booter_height));
+        refresh_header_height = attributes.getDimensionPixelSize(R.styleable.PullRefreshListView_refresh_header_height, getResources().getDimensionPixelSize(R.dimen.refresh_header_height));
+        refresh_footer_backgroundcolor = attributes.getColor(R.styleable.PullRefreshListView_refresh_footer_backgroundcolor, getResources().getColor(R.color.refresh_footer_backgroundcolor));
+        initViews(attrs);
+        attributes.recycle();
+    }
 
 	public void setPullRefreshBaseViewListener(PullRefreshBaseViewListener pullRefreshBaseViewListener){
 		this.pullRefreshBaseViewListener = pullRefreshBaseViewListener;
@@ -100,8 +113,8 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	}
 
 	/**
-	 * 初始化布局，这里全部使用 Java 代码实现
-	 * @param attrs 设置的属性
+     * init layout, all use Java code complete at here.
+	 * @param attrs from {@link PullRefreshListView} attrs
 	 */
 	protected void initViews(AttributeSet attrs){
 		enablePullUpRefresh = true;
@@ -119,7 +132,8 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 		listparams.addRule(RelativeLayout.ABOVE, footer.getId());
 		content.addView(absListView, listparams);
 
-		RelativeLayout.LayoutParams footerParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(50));
+        //refresh_booter_height
+		RelativeLayout.LayoutParams footerParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, refresh_booter_height);
 		footerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 		content.addView(footer, footerParams);
 
@@ -137,7 +151,8 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	 */
 	private void initHeader(){
 		header = new RelativeLayout(getContext());
-		header.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dip2px(60)));
+        //refresh_header_height
+		header.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, refresh_header_height));//60
 
 		arrow = new ImageView(getContext());
 		arrow.setImageResource(R.drawable.fox_animation);
@@ -145,7 +160,7 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 		arrowParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 		header.addView(arrow, arrowParams);
 
-		addView(header, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(52)));
+		addView(header);//, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(52))
 
 		measureView(header);
 		HEADER_VIEW_HEIGHT = header.getMeasuredHeight();
@@ -156,7 +171,9 @@ public abstract class PullRefreshBaseView extends FrameLayout implements OnScrol
 	 */
 	private void initFooter(){
 		footer = new RelativeLayout(getContext());
-		footer.setBackgroundColor(Color.parseColor("#7fe8e8e8"));
+        //refresh_footer_backgroundcolor
+//		footer.setBackgroundColor(Color.parseColor("#7fe8e8e8"));
+        footer.setBackgroundColor(refresh_footer_backgroundcolor);
 		footer.setPadding(dip2px(10), dip2px(10), dip2px(10), dip2px(10));
 
 		CircularProgress circularProgress = new CircularProgress(getContext());

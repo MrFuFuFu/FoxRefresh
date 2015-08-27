@@ -13,4 +13,15 @@
         <attr name="circular_progress_max" format="integer"/>
         <attr name="circular_progress_duration" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="PullRefreshListView">
+        <attr name="smooth_progress_color" format="color"/>
+        <attr name="smooth_progress_height" format="dimension"/>
+        <attr name="refresh_booter_height" format="dimension"/>
+        <attr name="refresh_header_height" format="dimension"/>
+        <attr name="refresh_footer_backgroundcolor" format="color"/>
+
+
+
+    </declare-styleable>
 </resources>

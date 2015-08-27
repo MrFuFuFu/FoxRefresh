@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -12,7 +11,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize" />
 
-    <mrfu.foxrefresh.lib.PullRefreshProgressListView
+    <mrfu.foxrefresh.lib.PullRefreshListView
+        xmlns:widget="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_progress_baseview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +23,10 @@
         android:fastScrollEnabled="false"
         android:listSelector="@android:color/transparent"
         android:overScrollMode="never"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbar"
+        widget:smooth_progress_color="#ffff4081"
+        widget:smooth_progress_height="2.5dp"
+        widget:refresh_booter_height="50dp"
+        widget:refresh_header_height="52dp"/>
 
 </RelativeLayout>

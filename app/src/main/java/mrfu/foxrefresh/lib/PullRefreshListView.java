@@ -1,7 +1,7 @@
 package mrfu.foxrefresh.lib;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.TypedArray;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
@@ -13,14 +13,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+import mrfu.foxrefresh.R;
 
 /**
  * Created by MrFu on 15/8/4.
  */
-public class PullRefreshProgressListView extends RelativeLayout implements PullRefreshBaseView.PullRefreshBaseViewListener {
+public class PullRefreshListView extends RelativeLayout implements PullRefreshBaseView.PullRefreshBaseViewListener {
 
+    private final int smooth_progress_color;
+    private final int smooth_progress_height;
     private SmoothProgressBar smooth_progress;
-    private PullRefreshListView pullRefreshListView;
+    private PullRefreshGetListView pullRefreshListView;
 
     public void setPullRefreshListener(PullRefreshListener listener){
         pullRefreshListener = listener;
@@ -28,19 +31,27 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
 
     private PullRefreshListener pullRefreshListener;
 
-    public PullRefreshProgressListView(Context context) {
+    public PullRefreshListView(Context context) {
         this(context, null);
     }
 
-    public PullRefreshProgressListView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public PullRefreshListView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+    public PullRefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PullRefreshListView);
+        smooth_progress_color = attributes.getColor(R.styleable.PullRefreshListView_smooth_progress_color, getResources().getColor(R.color.circular_progress_color));
+        smooth_progress_height = attributes.getDimensionPixelSize(R.styleable.PullRefreshListView_smooth_progress_height, getResources().getDimensionPixelSize(R.dimen.smooth_progress_height));
         initViewsCustom(attrs);
+        attributes.recycle();
     }
 
     private void initViewsCustom(AttributeSet attrs){
         smooth_progress = new SmoothProgressBar(getContext());
-        addView(smooth_progress, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dip2px(2.5f)));
-        pullRefreshListView = new PullRefreshListView(getContext(), attrs);
+        //smooth_progress_height
+        addView(smooth_progress, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, smooth_progress_height));
+        pullRefreshListView = new PullRefreshGetListView(getContext(), attrs);
         RelativeLayout.LayoutParams pullListViewParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         pullListViewParams.addRule(RelativeLayout.BELOW, smooth_progress.getId());
         addView(pullRefreshListView, pullListViewParams);
@@ -49,16 +60,11 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
         initSmoothProgressBar();
     }
 
-    public int dip2px(float dpValue) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-
     private void initSmoothProgressBar(){
         ShapeDrawable shape = new ShapeDrawable();
         shape.setShape(new RectShape());
-        shape.getPaint().setColor(Color.parseColor("#ffff4081"));
+        //smooth_progress_color
+        shape.getPaint().setColor(smooth_progress_color);
         ClipDrawable clipDrawable = new ClipDrawable(shape, Gravity.CENTER, ClipDrawable.HORIZONTAL);
         smooth_progress.setProgressDrawable(clipDrawable);
     }
@@ -110,13 +116,13 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
     }
 
 
-    private class PullRefreshListView extends PullRefreshBaseView{
+    private class PullRefreshGetListView extends PullRefreshBaseView{
 
-        public PullRefreshListView(Context context) {
+        public PullRefreshGetListView(Context context) {
             super(context);
         }
 
-        public PullRefreshListView(Context context, AttributeSet attrs) {
+        public PullRefreshGetListView(Context context, AttributeSet attrs) {
             super(context, attrs);
         }
 
