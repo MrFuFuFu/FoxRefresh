@@ -8,6 +8,7 @@ import android.graphics.drawable.shapes.RectShape;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -62,15 +63,34 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
         smooth_progress.setProgressDrawable(clipDrawable);
     }
 
+    /**
+     * get listview
+     * @return
+     */
     public ListView getListView(){
         return (ListView)pullRefreshListView.getAbsListView();
     }
 
+    /**
+     * to do refresh
+     */
     public void setRefreshing() {
         pullRefreshListView.setRefreshing();
     }
+
+    /**
+     * finish refresh
+     */
     public void reset() {
         pullRefreshListView.reset();
+    }
+
+    /**
+     * is or not support up to load more data
+     * @param enablePullUpRefresh default is true
+     */
+    public void setEnablePullUpRefresh(boolean enablePullUpRefresh){
+        pullRefreshListView.setEnablePullUpRefresh(enablePullUpRefresh);
     }
 
     @Override
@@ -87,5 +107,22 @@ public class PullRefreshProgressListView extends RelativeLayout implements PullR
     @Override
     public void onPullUpRefresh() {
         pullRefreshListener.onPullUpRefresh();
+    }
+
+
+    private class PullRefreshListView extends PullRefreshBaseView{
+
+        public PullRefreshListView(Context context) {
+            super(context);
+        }
+
+        public PullRefreshListView(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        @Override
+        public AbsListView createAbsListView(AttributeSet attrs) {
+            return new ListView(getContext(), attrs);
+        }
     }
 }
